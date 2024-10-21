@@ -17,8 +17,8 @@ app.use(cors(config.corsOptions));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -30,7 +30,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || config.port;
 app.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
+    logger.info(`Server is running on port ${PORT}`);
 });
 
 export default app;
