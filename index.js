@@ -28,7 +28,7 @@ app.use('/chat', validateApiKey, chatRoutes);
 // Error handling middleware
 app.use(errorHandler);
 
-const PORT = config.port;
+const PORT = process.env.PORT || config.port;
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
 });

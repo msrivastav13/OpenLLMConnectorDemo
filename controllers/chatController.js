@@ -53,7 +53,7 @@ export const chatCompletion = async (req, res, next) => {
       usage: response.data.usage,
     };
 
-    res.json(reshapedResponse);
+    res.status(200).json(reshapedResponse);
   } catch (error) {
     logger.error('Error in chat completion:', error);
     next(error);
