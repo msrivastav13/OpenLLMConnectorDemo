@@ -9,8 +9,10 @@ const chatCompletionSchema = Joi.object({
     role: Joi.string().valid('system', 'user', 'assistant').required(),
     content: Joi.string().required()
   })).min(1).required(),
+  model: Joi.string().default('mistralai/Mixtral-8x7B-Instruct-v0.1'),
   max_tokens: Joi.number().integer().min(1).default(500),
   temperature: Joi.number().min(0).max(1),
+  n: Joi.number().integer().min(1).default(1),
   parameters: Joi.object({
     top_p: Joi.number().min(0).max(1)
   })
