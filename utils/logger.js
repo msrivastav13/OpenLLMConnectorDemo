@@ -1,11 +1,15 @@
 import winston from 'winston';
 
-const logger = winston.createLogger({
+const createLogger = (options = {}) => {
+  const defaultOptions = {
     level: 'info',
     format: winston.format.simple(),
-    transports: [
-        new winston.transports.Console(),
-    ],
-});
+    transports: [new winston.transports.Console()],
+  };
 
-export default logger;
+  const mergedOptions = { ...defaultOptions, ...options };
+
+  return winston.createLogger(mergedOptions);
+};
+
+export default createLogger;

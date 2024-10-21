@@ -1,14 +1,9 @@
 import config from '../config/index.js';
 import winston from 'winston';
+import createLogger from '../utils/logger.js';
 
-const logger = winston.createLogger({
-    level: 'info',
+const logger = createLogger({
     format: winston.format.json(),
-    transports: [
-        new winston.transports.Console({
-            format: winston.format.simple(),
-        }),
-    ],
 });
 
 export const validateApiKey = (req, res, next) => {
