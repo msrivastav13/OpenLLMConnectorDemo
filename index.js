@@ -5,7 +5,16 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { validateApiKey, errorHandler } from './middleware/index.js';
 import config from './config/index.js';
-import logger from './utils/logger.js';
+import winston from 'winston';
+
+// Configure Winston to stream logs to stdout
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.simple(),
+  transports: [
+    new winston.transports.Console(),
+  ],
+});
 import chatRoutes from './routes/chat.js';
 
 const app = express();

@@ -2,7 +2,17 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Joi from 'joi';
 import config from '../config/index.js';
-import logger from '../utils/logger.js';
+import winston from 'winston';
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [
+        new winston.transports.Console({
+            format: winston.format.simple(),
+        }),
+    ],
+});
 
 const chatCompletionSchema = Joi.object({
     messages: Joi.array()
