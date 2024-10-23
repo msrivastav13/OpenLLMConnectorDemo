@@ -11,15 +11,15 @@ import chatRoutes from './routes/chat.js';
 
 // Create logger with sensitive data filtering
 const logger = createLogger({
-  format: winston.format.combine(
-    winston.format.simple(),
-    winston.format.printf(({ level, message }) => {
-      const sanitizedMessage = message
-        .replace(/Authorization:.*?(?=\s|$)/gi, 'Authorization: [REDACTED]')
-        .replace(/api[_-]?key:.*?(?=\s|$)/gi, 'api_key: [REDACTED]');
-      return `${level}: ${sanitizedMessage}`;
-    })
-  ),
+    format: winston.format.combine(
+        winston.format.simple(),
+        winston.format.printf(({ level, message }) => {
+            const sanitizedMessage = message
+                .replace(/Authorization:.*?(?=\s|$)/gi, 'Authorization: [REDACTED]')
+                .replace(/api[_-]?key:.*?(?=\s|$)/gi, 'api_key: [REDACTED]');
+            return `${level}: ${sanitizedMessage}`;
+        })
+    ),
 });
 
 const app = express();
@@ -29,34 +29,34 @@ app.use(express.json());
 
 // Helmet configuration with strict security settings
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", "data:", "https:"],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'"],
-        objectSrc: ["'none'"],
-        mediaSrc: ["'self'"],
-        frameSrc: ["'none'"],
-      },
-    },
-    crossOriginEmbedderPolicy: true,
-    crossOriginOpenerPolicy: { policy: "same-origin" },
-    crossOriginResourcePolicy: { policy: "same-origin" },
-    dnsPrefetchControl: { allow: false },
-    expectCt: { maxAge: 86400, enforce: true },
-    frameguard: { action: "deny" },
-    hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
-    ieNoOpen: true,
-    noSniff: true,
-    originAgentCluster: true,
-    permittedCrossDomainPolicies: { permittedPolicies: "none" },
-    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
-    xssFilter: true,
-  })
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'"],
+                styleSrc: ["'self'", "'unsafe-inline'"],
+                imgSrc: ["'self'", 'data:', 'https:'],
+                connectSrc: ["'self'"],
+                fontSrc: ["'self'"],
+                objectSrc: ["'none'"],
+                mediaSrc: ["'self'"],
+                frameSrc: ["'none'"],
+            },
+        },
+        crossOriginEmbedderPolicy: true,
+        crossOriginOpenerPolicy: { policy: 'same-origin' },
+        crossOriginResourcePolicy: { policy: 'same-origin' },
+        dnsPrefetchControl: { allow: false },
+        expectCt: { maxAge: 86400, enforce: true },
+        frameguard: { action: 'deny' },
+        hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+        ieNoOpen: true,
+        noSniff: true,
+        originAgentCluster: true,
+        permittedCrossDomainPolicies: { permittedPolicies: 'none' },
+        referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+        xssFilter: true,
+    })
 );
 
 app.use(cors(config.corsOptions));
