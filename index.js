@@ -3,24 +3,13 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import winston from 'winston';
 import { validateApiKey, errorHandler } from './middleware/index.js';
 import config from './config/index.js';
-import createLogger from './utils/logger.js';
+import createSanitizedLogger from './utils/logger.js';
 import chatRoutes from './routes/chat.js';
 
 // Create logger with sensitive data filtering
-const logger = createLogger({
-    format: winston.format.combine(
-        winston.format.simple(),
-        winston.format.printf(({ level, message }) => {
-            const sanitizedMessage = message
-                .replace(/Authorization:.*?(?=\s|$)/gi, 'Authorization: [REDACTED]')
-                .replace(/api[_-]?key:.*?(?=\s|$)/gi, 'api_key: [REDACTED]');
-            return `${level}: ${sanitizedMessage}`;
-        })
-    ),
-});
+const logger = createSanitizedLogger();
 
 const app = express();
 

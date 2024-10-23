@@ -1,18 +1,7 @@
 import config from '../config/index.js';
-import winston from 'winston';
-import createLogger from '../utils/logger.js';
+import createSanitizedLogger from '../utils/logger.js';
 
-const logger = createLogger({
-    format: winston.format.combine(
-        winston.format.simple(),
-        winston.format.printf(({ level, message }) => {
-            const sanitizedMessage = message
-                .replace(/Authorization:.*?(?=\s|$)/gi, 'Authorization: [REDACTED]')
-                .replace(/api[_-]?key:.*?(?=\s|$)/gi, 'api_key: [REDACTED]');
-            return `${level}: ${sanitizedMessage}`;
-        })
-    ),
-});
+const logger = createSanitizedLogger();
 
 export const validateApiKey = (req, res, next) => {
     const apiKey = req.headers['api-key'];
