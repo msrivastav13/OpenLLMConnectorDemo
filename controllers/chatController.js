@@ -41,7 +41,7 @@ export const chatCompletion = async (req, res, next) => {
         }
 
         const huggingFaceRequestBody = {
-            model: 'mistralai/Mistral-7B-Instruct-v0.3',
+            model: 'meta-llama/Llama-3.1-8B-Instruct',
             messages: value.messages,
             max_tokens: value.max_tokens,
             stream: false,

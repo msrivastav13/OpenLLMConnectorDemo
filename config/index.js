@@ -6,7 +6,7 @@ export default {
     port: process.env.PORT || 3000,
     huggingFaceApiKey: process.env.HUGGING_FACE_API_KEY,
     huggingFaceApiUrl:
-        'https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B',
+        'https://api-inference.huggingface.co/models/meta-llama/Llama-3.1-8B-Instruct/v1/chat/completions',
     corsOptions: {
         origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [],
         methods: ['POST'],
