@@ -79,8 +79,7 @@ export const chatCompletion = async (req, res, next) => {
         logger.error('Error in chat completion:', {
             status: error.response?.status,
             statusText: error.response?.statusText,
-            data: error.response?.data,
-            message: error.message
+            response: error.response?.data,
         });
         next(error);
     }
