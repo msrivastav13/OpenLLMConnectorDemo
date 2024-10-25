@@ -24,7 +24,7 @@ const chatCompletionSchema = Joi.object({
         )
         .min(1)
         .required(),
-    model: Joi.string().default('mistralai/Mixtral-8x7B-Instruct-v0.1'),
+    model: Joi.string().required(),
     max_tokens: Joi.number().integer().min(1).default(500),
     temperature: Joi.number().min(0).max(1),
     n: Joi.number().integer().min(1).default(1),
