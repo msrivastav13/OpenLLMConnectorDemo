@@ -40,9 +40,24 @@ export const chatCompletion = async (req, res, next) => {
             return res.status(400).json({ error: error.details[0].message });
         }
 
+        // Optimize message processing
+        const systemMessages = [];
+        const otherMessages = [];
+        for (const message of value.messages) {
+            if (message.role === 'system') {
+                systemMessages.push(message.content);
+            } else {
+                otherMessages.push(message);
+            }
+        }
+
+        const processedMessages = systemMessages.length > 0
+            ? [{ role: 'system', content: systemMessages.join('\n') }, ...otherMessages]
+            : otherMessages;
+
         const huggingFaceRequestBody = {
             model: value.model,
-            messages: value.messages,
+            messages: processedMessages,
             max_tokens: value.max_tokens,
             stream: false,
         };
