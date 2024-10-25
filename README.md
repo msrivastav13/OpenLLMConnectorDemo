@@ -85,10 +85,41 @@ The project is structured as follows:
 - Comprehensive error handling and sanitized logging
 - Helmet.js integration for enhanced security headers
 - Chat completion controller with input validation and response reshaping
+- Optimized message processing:
+  - Concatenates multiple system messages into a single message
+  - Preserves the order of user and assistant messages
 
 ## API Endpoints
 
 - POST `/chat/completions`: Send a chat message and receive an AI-generated response
+  - Optimizes message processing by concatenating system messages
+  - Example:
+    ```json
+    {
+      "messages": [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "Always be polite."},
+        {"role": "user", "content": "Hello!"},
+        {"role": "assistant", "content": "Hi there!"},
+        {"role": "user", "content": "How are you?"}
+      ],
+      "model": "gpt-3.5-turbo",
+      "max_tokens": 150
+    }
+    ```
+  - The API will process this into:
+    ```json
+    {
+      "messages": [
+        {"role": "system", "content": "You are a helpful assistant.\nAlways be polite."},
+        {"role": "user", "content": "Hello!"},
+        {"role": "assistant", "content": "Hi there!"},
+        {"role": "user", "content": "How are you?"}
+      ],
+      "model": "gpt-3.5-turbo",
+      "max_tokens": 150
+    }
+    ```
 
 ## Security Measures
 
