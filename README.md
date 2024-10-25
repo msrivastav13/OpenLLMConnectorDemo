@@ -68,6 +68,8 @@ The project is structured as follows:
   - `index.js`: Exports configuration options
 - `routes/`: API routes
   - `chat.js`: Chat-related routes
+- `controllers/`: Request handlers
+  - `chatController.js`: Makes calls to the chat completion API
 - `middleware/`: Custom middleware functions
   - `index.js`: Includes API key validation and error handling
 - `utils/`: Utility functions
@@ -82,6 +84,7 @@ The project is structured as follows:
 - API key validation for protected routes
 - Comprehensive error handling and sanitized logging
 - Helmet.js integration for enhanced security headers
+- Chat completion controller with input validation and response reshaping
 
 ## API Endpoints
 
