@@ -41,7 +41,7 @@ export const chatCompletion = async (req, res, next) => {
         }
 
         const huggingFaceRequestBody = {
-            model: 'meta-llama/Llama-3.1-8B-Instruct',
+            model: value.model,
             messages: value.messages,
             max_tokens: value.max_tokens,
             stream: false,
@@ -55,7 +55,7 @@ export const chatCompletion = async (req, res, next) => {
         }
 
         const response = await axios.post(
-            `${config.huggingFaceApiUrl}chat/completions`,
+            `${config.huggingFaceApiUrl}${value.model}/v1/chat/completions`,
             huggingFaceRequestBody,
             {
                 headers: {
@@ -76,7 +76,12 @@ export const chatCompletion = async (req, res, next) => {
 
         res.status(200).json(reshapedResponse);
     } catch (error) {
-        logger.error('Error in chat completion:', error);
+        logger.error('Error in chat completion:', {
+            status: error.response?.status,
+            statusText: error.response?.statusText,
+            data: error.response?.data,
+            message: error.message
+        });
         next(error);
     }
 };

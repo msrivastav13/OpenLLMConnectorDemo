@@ -13,5 +13,12 @@ export const validateApiKey = (req, res, next) => {
 
 export const errorHandler = (err, req, res, next) => {
     logger.error(err.stack);
-    res.status(500).send('Something broke!');
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    res.status(statusCode).json({
+        error: {
+            status: statusCode,
+            message: message
+        }
+    });
 };
