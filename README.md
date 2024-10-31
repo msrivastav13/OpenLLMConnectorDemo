@@ -29,8 +29,8 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/ai-chat-application.git
-   cd ai-chat-application
+   git clone https://github.com/msrivastav13/OpenLLMConnectorDemo.git
+   cd OpenLLMConnectorDemo
    ```
 
 2. Install dependencies:
@@ -48,7 +48,7 @@ HUGGING_FACE_API_KEY=your_hugging_face_api_key_here
 ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
 ```
 
-Replace `your_hugging_face_api_key_here` with your actual Hugging Face API key and adjust the `ALLOWED_ORIGINS` as needed.
+Replace `your_hugging_face_api_key_here` with your actual Hugging Face API key and adjust the `ALLOWED_ORIGINS` as needed. This should be your Salesforce Domain
 
 ## Running the Application
 
