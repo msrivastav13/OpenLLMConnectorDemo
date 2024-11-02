@@ -4,13 +4,13 @@ dotenv.config();
 
 const validateEnvironment = () => {
     const requiredEnvVars = ['HUGGING_FACE_API_KEY'];
-    
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-    
+
+    const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+
     if (missingVars.length > 0) {
         throw new Error(
             `Missing required environment variables: ${missingVars.join(', ')}\n` +
-            'Please check your .env file or environment configuration.'
+                'Please check your .env file or environment configuration.'
         );
     }
 };
