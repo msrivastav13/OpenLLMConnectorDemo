@@ -2,7 +2,7 @@
 
 This project demonstrates an implementation of the LLM Open Connector API specification, which enables the creation of API gateways and proxy servers to connect language models to the Einstein AI Platform. This example uses the Hugging Face API to showcase how any language model can be integrated with Einstein Studio using the Bring Your Own LLM (BYOLLM) feature.
 
-The implementation features a Node.js backend with Express, adhering to the OpenAI API-based specification while incorporating robust security measures and best practices.
+The implementation features an opinionated Node.js backend with Express, adhering to the LLM Open Connector specification while incorporating robust security measures and best practices.
 
 ## Table of Contents
 
@@ -67,7 +67,7 @@ The project is structured as follows:
 - `config/`: Configuration files
   - `index.js`: Exports configuration options
 - `routes/`: API routes
-  - `chat.js`: Chat-related routes
+  - `chat.js`: Chat-completion routes
 - `controllers/`: Request handlers
   - `chatController.js`: Makes calls to the chat completion API
 - `middleware/`: Custom middleware functions
@@ -86,7 +86,7 @@ The project is structured as follows:
 - Helmet.js integration for enhanced security headers
 - Chat completion controller with input validation and response reshaping
 - Optimized message processing:
-  - Concatenates multiple system messages into a single message
+  - Concatenates multiple system messages into a single message as required by some LLMs
   - Preserves the order of user and assistant messages
 
 ## API Endpoints
